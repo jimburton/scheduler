@@ -17,6 +17,7 @@ public abstract class Scheduler
     private SchedulerStats schedulerStats;
 
     public Scheduler (String name) {
+        this.name = name;
         schedulerStats = new SchedulerStats(name);
     }
 
