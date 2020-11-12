@@ -1,21 +1,23 @@
 # OS Scheduling Simulation
 
-This repository contains two simulators of OS scheduling algorithms both written in Java. The simulator 
+This repository contains two simulators of OS scheduling algorithms both written in Java. The first simulator 
 implements several scheduling algorithms: 
                                                                                           
 * *first-come-first-served*,
 * *preemptive-first-come-first-served (no aging)*, and
 * *non-preemptive-highest-priority-first (no aging)*. 
 
+The second simulator implements *first-come-first-served* only and is controlled by a configuration file.
+
 Get a copy of the repository and open it in your IDE. This project uses *maven*, which is a tool for
  building Java projects, and the code is organised in the standard maven way: the application code is
- the folder `src/main/java` while the tests are in the folder `src/test/java`.  The first simulator is in the package 
-`ci583.scheduling.os`. 
+ the folder `src/main/java` while the tests are in the folder `src/test/java`.   
 
-## *first-come-first-served*
+## *First-come-first-served*
 
-Run the test `testFCFS` and inspect the output. The first
-block of text in the output is the queue of processes to be scheduled. You will see
+Run the test `testFCFS`, which runs the first simulator with the *first-come-first-served* algorithm.
+ Inspect the output in the console. The first
+block of text is the queue of processes to be scheduled. You will see
 that each process is due to start at a different time (`arrivalTime`) and is expected to run for
 a different number of "time slices" (`expectedRunTime`). A time slice, also called a "quantum", is the
  unit of time the scheduler will allow a process to run before pausing that process and switching 
@@ -31,28 +33,29 @@ a different number of "time slices" (`expectedRunTime`). A time slice, also call
  This is the method that chooses the next process to run. Try to find the line of code that selects
  the next process, and note the way in which it happens.
  
-## *non-preemptive highest-priority*
+## *Non-preemptive highest-priority*
 
 Run the test `testNPHP` to see the next scheduling algorithm in action. This scheduler will select the 
 next process based on it having the highest priority of those available to run. Because it is not
-pre-emptive, the scheduler will not interrupt a process once it is running, however.
+pre-emptive, the scheduler will not interrupt a process once it is running, even if a higher priority
+process is available.
 
 Now read the code for this scheduler, which is in the `schedulers` package. Not the difference in the way
 the next process is selected.
 
-## *preemptive first-come-first-served*
+## *Preemptive first-come-first-served*
 
 Run the test `testPFCFS` to see the third scheduling algorithm. This scheduler will select the 
-next process based on it having the shortest time remaining to run. It is not
-pre-emptive, so as new processes become runnable they may be given priority over the currently
-running process. Again, read the code and identify the section where these decisions are made.
+next process based on it having the shortest time remaining to run. It is pre-emptive, so as new 
+processes become runnable they may be given priority over the currently running process. Again, 
+read the code and identify the section where these decisions are made.
 
-## MOS-Schedular
+## MOS-Scheduler
 
 There is a second implementation of the *first-come-first-served* scheduling algorithm in
 the package `ci583.scheduling.mos`. The main method is in the `Scheduling` class
 and the simulation parameters are read from the config file in `etc/scheduling.conf`. The results 
-of the simulation are saved in the two files: `etc/summary-results` and `etc/summary-processes`. 
+of the simulation are saved in the two files: `etc/summary-results.log` and `etc/summary-processes.log`. 
 
 The simulator reads parameters from the config file then
 creates the specified number of processes, each of which blocks (simulating what happens when a process
@@ -66,15 +69,15 @@ processes, causing each to block for input or output after the specified interva
 all processes have completed their randomly generated amount of runtime, or until
 the maximum amount of runtime for the simulation is exceeded.
 
-As the simulation proceeds, a log file (`etc/summary-processes`) is generated which
+As the simulation proceeds, a log file (`etc/summary-processes.log`) is generated which
 shows the activity of the scheduling algorithm as it considers each process in the
-process queue. After the simulation halts, a summary report (`etc/summary-results`) is generated which
+process queue. After the simulation halts, a summary report (`etc/summary-results.log`) is generated which
 shows statistics for each process and for the simulation as a whole. The fields and columns in the report 
 are described in the following table.
 
 | Field                   | Description                                | 
 | ----------------------- | ------------------------------------------ |
-| Scheduling Type         | The type of the scheduling algorithm used. The value displayed is hard coded in the `SchedulingAlgorithm` class.|
+| Scheduling Type         | The type of scheduling algorithm used. The value displayed is hard coded in the `SchedulingAlgorithm` class.|
 | Scheduling Name         | The name of the scheduling algorithm used. The value displayed is hard coded in the `SchedulingAlgorithm` class.               |
 | Simulation Run Time     | The number of milliseconds that the simulation ran. This may be less than or equal to the total amount of time specified by the `runtime` configuration parameter. |
 | Mean                   | The average amount of runtime for the processes as specified by the `meandev` configuration parameter. |
