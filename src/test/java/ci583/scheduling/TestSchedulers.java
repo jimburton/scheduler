@@ -9,36 +9,21 @@ import org.junit.Test;
 public class TestSchedulers {
 
     @Test
-    public void testFirstComeFirstServed() {
+    public void testFCFS() {
         Scheduler fcfs = new FirstComeFirstServed();
-        Runner.run(fcfs);
-        System.out.println("\n-------------------------------------------");
-        System.out.println("Average Statistics");
-
-        System.out.println("\n---------------------------");
-        System.out.println(fcfs.getStats().formatAvgStats());
+        Runner.run(fcfs, 1);
     }
 
     @Test
     public void testNPHP() {
         Scheduler nphp = new NonpreemptiveHighestPriorityFirstNoAging();
-        Runner.run(nphp);
-        System.out.println("\n-------------------------------------------");
-        System.out.println("Average Statistics");
-
-        System.out.println("\n---------------------------");
-        System.out.println(nphp.getStats().formatAvgStats());
+        Runner.run(nphp, 1);
     }
 
     @Test
     public void runPFCFS() {
         Scheduler pfcfs = new PreemptiveFirstComeFirstServedNoAging();
-        Runner.run(pfcfs);
-        System.out.println("\n-------------------------------------------");
-        System.out.println("Average Statistics");
-
-        System.out.println("\n---------------------------");
-        System.out.println(pfcfs.getStats().formatAvgStats());
+        Runner.run(pfcfs, 1);
     }
 
     @Test

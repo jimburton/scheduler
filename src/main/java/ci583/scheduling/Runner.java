@@ -10,6 +10,10 @@ public class Runner {
     private static final int ALGORITHM_COUNT = 1;
 
     public static void run(Scheduler scheduler) {
+        run(scheduler, SIMULATION_RUNS);
+    }
+
+    public static void run(Scheduler scheduler, int runs) {
         // Hold duplicated process queues for each algorithm to use
         @SuppressWarnings("unchecked")
         PriorityQueue<Process>[] q = new PriorityQueue[ALGORITHM_COUNT + 1];
@@ -18,7 +22,7 @@ public class Runner {
         System.out.println("---------------------------");
         System.out.format(scheduler.getName()+":\n");
         // Test the scheduling algorithm SIMULATION_RUNS times
-        for (int i = 0; i < SIMULATION_RUNS; ++i) {
+        for (int i = 0; i < runs; ++i) {
             System.out.println("---------------------------");
             System.out.format("Scheduling Process Queue %d:\n", i + 1);
             System.out.println("---------------------------");
