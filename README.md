@@ -53,7 +53,8 @@ read the code and identify the section where these decisions are made.
 ## MOS-Scheduler
 
 There is a second implementation of the *first-come-first-served* scheduling algorithm in
-the package `ci583.scheduling.mos`. The main method is in the `Scheduling` class
+the package `ci583.scheduling.mos`. This simulator was developed as part of the [Modern 
+Operating Systems](http://www.ontko.com/moss) project. The main method is in the `Scheduling` class
 and the simulation parameters are read from the config file in `etc/scheduling.conf`. The results 
 of the simulation are saved in the two files: `etc/summary-results.log` and `etc/summary-processes.log`. 
 
